@@ -8,6 +8,11 @@ namespace ExpenseManager.Persistence
 
 	public class ExpenseManagerContext : DbContext
 	{
+		public ExpenseManagerContext(DbContextOptions<ExpenseManagerContext> options)
+			: base(options)
+		{
+		}
+
 		public DbSet<Account> Accounts { get; private set; }
 
 		public DbSet<Transaction> Transactions { get; private set; }
