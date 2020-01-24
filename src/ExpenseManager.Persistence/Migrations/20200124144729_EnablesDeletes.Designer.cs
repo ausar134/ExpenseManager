@@ -3,14 +3,16 @@ using System;
 using ExpenseManager.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExpenseManager.Persistence.Migrations
 {
     [DbContext(typeof(ExpenseManagerContext))]
-    partial class ExpenseManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20200124144729_EnablesDeletes")]
+    partial class EnablesDeletes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

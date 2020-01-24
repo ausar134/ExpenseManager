@@ -5,11 +5,13 @@ namespace ExpenseManager.Web.Api
 {
 	using System;
 	using System.IO;
+	using System.Net.Mail;
 	using System.Reflection;
 	using System.Threading.Tasks;
 
 	using ExpenseManager.Models;
 	using ExpenseManager.Persistence;
+	using ExpenseManager.Web.Api.Controllers;
 
 	using Microsoft.AspNetCore.Hosting;
 	using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,8 @@ namespace ExpenseManager.Web.Api
 	using Serilog.Core;
 	using Serilog.Events;
 	using Serilog.Sinks.SystemConsole.Themes;
+
+	using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 	public static class Program
 	{
