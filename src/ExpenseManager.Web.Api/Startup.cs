@@ -23,7 +23,7 @@ namespace ExpenseManager.Web.Api
 		{
 			services.AddRazorPages();
 			services.AddDbContext<ExpenseManagerContext>(options => options
-				.UseSqlite("Data Source=context.db3"));
+				.UseSqlite(Configuration.GetConnectionString("ExpenseManager")));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

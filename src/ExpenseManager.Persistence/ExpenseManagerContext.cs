@@ -5,19 +5,36 @@ namespace ExpenseManager.Persistence
 	using ExpenseManager.Persistence.Entities;
 
 	using Microsoft.EntityFrameworkCore;
+	using Microsoft.Extensions.Logging;
 
 	public class ExpenseManagerContext : DbContext
 	{
-		public ExpenseManagerContext(DbContextOptions<ExpenseManagerContext> options)
+		private readonly ILoggerFactory loggerFactory;
+
+		public ExpenseManagerContext(DbContextOptions<ExpenseManagerContext> options, ILoggerFactory factory)
 			: base(options)
-		{
-		}
+			=> loggerFactory = factory;
 
 		public DbSet<Account> Accounts { get; private set; }
 
 		public DbSet<Transaction> Transactions { get; private set; }
 
 		public DbSet<TransactionCategory> Categories { get; private set; }
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			if (optionsBuilder == null)
+			{
+				throw new ArgumentNullException(nameof(optionsBuilder));
+			}
+
+			if (loggerFactory != null)
+			{
+				optionsBuilder.UseLoggerFactory(loggerFactory);
+			}
+
+			base.OnConfiguring(optionsBuilder);
+		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
