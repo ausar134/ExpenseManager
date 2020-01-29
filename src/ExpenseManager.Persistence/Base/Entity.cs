@@ -1,3 +1,4 @@
+#pragma warning disable CA1819 // Properties should not return arrays
 namespace ExpenseManager.Persistence.Base
 {
 	using System;
@@ -6,7 +7,7 @@ namespace ExpenseManager.Persistence.Base
 
 	using ExpenseManager.Persistence.Interfaces;
 
-	public abstract class Entity<T> : IEntity<T>, IConcurrent
+	public abstract class Entity<T> : IEntity<T>, IConcurrent, IDeletable
 		where T : IComparable
 	{
 		/// <summary>
@@ -18,9 +19,9 @@ namespace ExpenseManager.Persistence.Base
 		/// <summary>
 		/// Simple field to track Database Concurrency.
 		/// </summary>
-#pragma warning disable CA1819 // Properties should not return arrays
 		[Timestamp]
 		public byte[] RowVersion { get; set; }
-#pragma warning restore CA1819 // Properties should not return arrays
+
+		public bool IsDeleted { get; set; }
 	}
 }
